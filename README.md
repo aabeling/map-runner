@@ -2,6 +2,16 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.12.
 
+## Idea
+
+To be used together with a crosstrainer or some other training device.
+The device is expected to generate impulses (e.g. for a step) which are
+transmitted with a right mouse click
+(I had https://www.instructables.com/Turn-your-Crosstrainer-in-a-VR-Machine/ in mind).
+
+A map displays a route obtained from some gpx file and a marker is moved according to the
+impulses.
+
 ## openssl
 
 ```
