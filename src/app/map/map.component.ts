@@ -30,4 +30,16 @@ export class MapComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.initMap();
   }
+
+  onRightClick(event: any): boolean {
+    this.onImpulse();
+    return false;
+  }
+
+  /**
+   * Handles an impulse from a training device.
+   */
+  onImpulse(): void {
+    console.log(new Date(), "onImpulse");
+  }
 }
