@@ -73,6 +73,7 @@ export class MapComponent implements AfterViewInit {
       this.trackIndex = 0;
     }
     this.runner.setLatLng([this.latlngs[this.trackIndex].lat, this.latlngs[this.trackIndex].lng]);
+    this.map.panTo(this.runner.getLatLng());
   }
 
   initRun(): void {
