@@ -10,6 +10,9 @@ import 'leaflet-gpx';
 export class MapComponent implements AfterViewInit {
   
   private map: any;
+  private latlngs : any;
+  private runner!: L.Marker;
+  private trackIndex : number = 0;
 
   private initMap(): void {
     this.map = L.map('map', {
@@ -34,9 +37,16 @@ export class MapComponent implements AfterViewInit {
         startIconUrl: undefined,
         endIconUrl: undefined,
         shadowUrl: undefined
+      },
+      gpx_options: {
+        parseElements: ['track', 'route', 'waypoint']
       }
     }).on('loaded', function(e : any) {
-      self.map.fitBounds(e.target.getBounds());
+      var gpx = e.target;
+      self.map.fitBounds(gpx.getBounds());
+      var layer = e.layers;
+      self.latlngs = layer.getLatLngs();
+      self.initRun();
     }).addTo(this.map);
     
   }
@@ -57,5 +67,21 @@ export class MapComponent implements AfterViewInit {
    */
   onImpulse(): void {
     console.log(new Date(), "onImpulse");
+
+    this.trackIndex++;
+    if (this.trackIndex >= this.latlngs.length) {
+      this.trackIndex = 0;
+    }
+    this.runner.setLatLng([this.latlngs[this.trackIndex].lat, this.latlngs[this.trackIndex].lng]);
+  }
+
+  initRun(): void {
+    /* put the runner marker on the first track point */   
+    console.log("starting at ", this.latlngs[0].lat, this.latlngs[0].lng);
+
+    var icon = new L.Icon.Default();
+    icon.options.shadowSize = [0,0];
+    this.runner = new L.Marker([this.latlngs[0].lat, this.latlngs[0].lng], {icon : icon});
+    this.runner.addTo(this.map);
   }
 }
