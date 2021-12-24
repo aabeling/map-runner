@@ -1,0 +1,11 @@
+<div id="device-mapper-container">
+    <form [formGroup]="deviceMapperForm">
+        <div>
+            <label for="metersPerImpulse">
+                metersPerImpulse
+            </label>
+            <span>{{ metersPerImpulse }}</span>
+            <input id="metersPerImpulse" type="text" formControlName="metersPerImpulse" (ngModelChange)="onChange()">
+          </div>
+    </form>
+</div>
