@@ -5,7 +5,11 @@
                 metersPerImpulse
             </label>
             <span>{{ metersPerImpulse }}</span>
-            <input id="metersPerImpulse" type="text" formControlName="metersPerImpulse" (ngModelChange)="onChange()">
+            <input id="metersPerImpulse" type="text" formControlName="metersPerImpulse" (ngModelChange)="onChange()"><br/>
+            <label for="velocity">
+                velocity
+            </label>
+            <span>{{ velocity }} m/s</span>
           </div>
     </form>
 </div>

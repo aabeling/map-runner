@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import * as L from 'leaflet';
 import 'leaflet-gpx';
+import { DeviceService } from '../device.service';
 
 @Component({
   selector: 'app-map',
@@ -51,7 +52,9 @@ export class MapComponent implements AfterViewInit {
     
   }
 
-  constructor() { }
+  constructor(
+    private deviceService: DeviceService
+  ) { }
 
   ngAfterViewInit(): void {
     this.initMap();
@@ -66,7 +69,6 @@ export class MapComponent implements AfterViewInit {
    * Handles an impulse from a training device.
    */
   onImpulse(): void {
-    console.log(new Date(), "onImpulse");
 
     this.trackIndex++;
     if (this.trackIndex >= this.latlngs.length) {
@@ -74,6 +76,8 @@ export class MapComponent implements AfterViewInit {
     }
     this.runner.setLatLng([this.latlngs[this.trackIndex].lat, this.latlngs[this.trackIndex].lng]);
     this.map.panTo(this.runner.getLatLng());
+
+    this.deviceService.onImpulse();
   }
 
   initRun(): void {
